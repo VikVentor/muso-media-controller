@@ -12,12 +12,14 @@ Libraries needed:
 BleKeyboard: by T-vK
 NOTE: You must install 2.0.11 board version of esp32 in your IDE if you want to manually upload the code.
 
-Resources
-Usage & Video Assembly:
-Watch on YouTube
+# Resources
 
-CAD Files:
-Makerworld Model
+**Usage & Video Assembly:**  
+[Watch on YouTube](https://youtu.be/BsYD-j6iA5c?si=oxRy-cGPvYlrXnKK)
 
-Instructables Assembly:
-Step-by-step Guide
+**CAD Files:**  
+[Makerworld Model](https://makerworld.com/en/models/1776693-media-controller-for-laptop-phone#profileId-1892173)
+
+**Instructables Assembly:**  
+[Step-by-step Guide](https://www.instructables.com/Media-Controller-for-LaptopPhone/)
+

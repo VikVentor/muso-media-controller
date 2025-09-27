@@ -11,3 +11,13 @@ Libraries needed:
 
 BleKeyboard: by T-vK
 NOTE: You must install 2.0.11 board version of esp32 in your IDE if you want to manually upload the code.
+
+Resources
+Usage & Video Assembly:
+Watch on YouTube
+
+CAD Files:
+Makerworld Model
+
+Instructables Assembly:
+Step-by-step Guide

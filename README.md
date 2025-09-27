@@ -1,4 +1,4 @@
-File descriptions:
+#File descriptions:
 
 flash download too: install this if you want to flash my readily available firmware/code onto your board.
 streamo_ventoron: contains the files to be flashed by the flash tool.

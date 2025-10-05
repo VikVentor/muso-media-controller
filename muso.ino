@@ -8,6 +8,7 @@ const int swPin  = 25;
 
 int lastClk = HIGH;
 bool lastButton = HIGH;
+bool trackChanged = false;
 
 void setup() {
   Serial.begin(115200);
@@ -25,18 +26,20 @@ void loop() {
     // --- Encoder rotation ---
     int clkState = digitalRead(clkPin);
     if (clkState != lastClk) {
-      if (digitalRead(dtPin) != clkState) {
-        if (buttonState == LOW) {
+      if (buttonState == LOW && !trackChanged) { // Only if track has NOT been changed yet
+        if (digitalRead(dtPin) != clkState) {
           bleKeyboard.write(KEY_MEDIA_NEXT_TRACK);
           Serial.println("NEXT TRACK");
         } else {
-          bleKeyboard.write(KEY_MEDIA_VOLUME_UP);
-          Serial.println("VOL UP");
-        }
-      } else {
-        if (buttonState == LOW) {
           bleKeyboard.write(KEY_MEDIA_PREVIOUS_TRACK);
           Serial.println("PREVIOUS TRACK");
+        }
+        trackChanged = true; // Lock until button is released
+      } else if (buttonState == HIGH) {
+        // Volume (no lock)
+        if (digitalRead(dtPin) != clkState) {
+          bleKeyboard.write(KEY_MEDIA_VOLUME_UP);
+          Serial.println("VOL UP");
         } else {
           bleKeyboard.write(KEY_MEDIA_VOLUME_DOWN);
           Serial.println("VOL DOWN");
@@ -48,13 +51,17 @@ void loop() {
 
     // --- Button press (play/pause) ---
     if (lastButton == HIGH && buttonState == LOW) {
-      // debounce delay
       delay(50);
       if (digitalRead(swPin) == LOW) {
         bleKeyboard.write(KEY_MEDIA_PLAY_PAUSE);
         Serial.println("PLAY/PAUSE");
-        delay(300); // debounce
       }
+    }
+    // If button is released, allow new track change
+    if (lastButton == LOW && buttonState == HIGH) {
+      trackChanged = false; // <-- Reset when button is released
+      Serial.println("trackChange RESET");
+      delay(700); // Increase delay to avoid unconsciously editing the volume
     }
     lastButton = buttonState;
   }
